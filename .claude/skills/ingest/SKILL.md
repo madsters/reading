@@ -19,9 +19,15 @@ calibration) yourself.
 - `arxiv-paper` → `scripts/fetch_arxiv_source.py <id> --out materials/<slug>/source`
   then read the flattened `.tex` into `material.md`. **Near-lossless — do not quiz
   notation on this path.**
-- `slides` → `scripts/extract_slides.py <file> --out materials/<slug>` (text + speaker
-  notes + slide images). Speaker notes are the richest comprehension signal — keep them.
-- `journal-paper` / PDF → `scripts/convert_pdf.py <file> --out materials/<slug>`.
+- `slides` **and `.pptx`** → `scripts/extract_slides.py <file> --out materials/<slug>`
+  (text + speaker notes + slide images). Speaker notes are the richest comprehension
+  signal — keep them.
+- `slides` **but a PDF** (e.g. a Beamer deck) → `scripts/convert_pdf.py <file> --out
+  materials/<slug> --no-ocr` — python-pptx can't read a PDF, and a Beamer PDF has no
+  speaker notes. Use `--no-ocr` for born-digital PDFs (clean text layer); formula
+  enrichment stays on so equations come through as LaTeX.
+- `journal-paper` / PDF → `scripts/convert_pdf.py <file> --out materials/<slug>`
+  (add `--no-ocr` if it's born-digital rather than scanned).
 - `document` → `scripts/convert_doc.py <file> --out materials/<slug>`.
 
 ## Flag-and-confirm (flag-driven)
