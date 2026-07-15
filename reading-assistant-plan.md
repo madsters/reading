@@ -120,6 +120,14 @@ group's related publications, the course or origin, and where this material sits
 body of work. LLM writes `context.md`: lineage, contribution, positioning. Honestly
 records in `flags.md` when context couldn't be established.
 
+**3b. Resolve sources** *(script + LLM, conditional).* Fires automatically when a converted
+material has **flagged low-confidence equations** *and* a **core reference on arXiv**: fetch
+that paper's lossless LaTeX source (`fetch_arxiv_source.py` into `materials/<slug>/refs/`)
+and reconcile the flagged equations against ground truth — correcting `material.md` and
+marking flags **resolved** with a citation. This is the package self-healing recognition
+errors instead of asking you to cross-check by hand. Skipped when maths converted cleanly
+or no reference is on arXiv.
+
 **4. Verify the maths** *(LLM + sympy scripts, conditional on maths present).* The trust
 layer. Re-derive selected steps symbolically, check dimensional consistency, confirm
 indices balance, test limiting/edge cases numerically. Results go to `verify.md`. Runs by
@@ -186,6 +194,7 @@ reading/
 │       ├── assumptions.md        # preconditions each key result relies on
 │       ├── context.md            # lineage, positioning, related work
 │       ├── verify.md             # what the maths checks found
+│       ├── refs/                 # fetched arXiv sources for flagged-equation reconciliation
 │       ├── onepager.pdf          # the deliverable
 │       └── qa/                   # Q&A logs (.md + rendered .html)
 └── README.md
