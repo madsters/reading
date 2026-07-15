@@ -21,3 +21,7 @@ venv/
 
 # Processed corpora are kept (commit on your private branch); nothing to ignore
 # under materials/ by default.
+
+# Fetched arXiv source: keep flattened.tex, drop the bulky raw payload
+materials/*/refs/*/eprint.tar.gz
+materials/*/refs/*/raw/
