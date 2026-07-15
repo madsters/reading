@@ -1,3 +1,6 @@
+<!-- SOURCE-RECONCILED against arXiv:2105.07769 (F. Milano, Complex Frequency):
+     \wp -> j (imaginary unit); \bar{a} -> \bar{\imath} (current). See flags.md. -->
+
 <!-- image -->
 
 ## Modelling, Control, Stability Analysis and Simulation of Low-Inertia Power Systems
@@ -98,7 +101,7 @@ This section defines the link between complex power and complex frequency in ac 
 
 Let us consider the power injection at network buses:
 
-$$\bar { s } ( t ) = p ( t ) + j q ( t ) = \bar { v } ( t ) \circ \bar { a } ^ { * } ( t ) \, ,$$
+$$\bar { s } ( t ) = p ( t ) + j q ( t ) = \bar { v } ( t ) \circ \bar { \imath } ^ { * } ( t ) \, ,$$
 
 <!-- image -->
 
@@ -110,7 +113,7 @@ This section defines the link between complex power and complex frequency in ac 
 
 Let us consider the power injection at network buses:
 
-$$\bar { s } ( t ) = p ( t ) + j q ( t ) = \bar { v } ( t ) \circ \bar { a } ^ { * } ( t ) \, ,$$
+$$\bar { s } ( t ) = p ( t ) + j q ( t ) = \bar { v } ( t ) \circ \bar { \imath } ^ { * } ( t ) \, ,$$
 
 where voltages and currents are Park's vectors (or analytic signals), i.e., are valid in transient conditions:
 
@@ -124,7 +127,7 @@ $$\bar { v } ( t ) = v _ { d } ( t ) + \jmath v _ { q } ( t ) \, .$$
 
 Let us rewrite the Park vector of the voltage in polar coordinates:
 
-$$\bar { v } = v \, e ^ { \wp \theta } = e ^ { ( u + \wp \theta ) }$$
+$$\bar { v } = v \, e ^ { j \theta } = e ^ { ( u + j \theta ) }$$
 
 <!-- image -->
 
@@ -136,23 +139,7 @@ where u = ln( v ).
 
 Let us rewrite the Park vector of the voltage in polar coordinates:
 
-$$\bar { v } = v \, e ^ { \wp \theta } = e ^ { ( u + \wp \theta ) }$$
-
-where u = ln( v ).
-
-Then, the complex frequency is defined as follows:
-
-$$\bar { \eta } = \frac { d } { d t } ( u + j \theta ) = u ^ { \prime } + j \theta ^ { \prime } = \rho + j \omega \, ,$$
-
-<!-- image -->
-
-<!-- image -->
-
-## Complex Frequency
-
-Let us rewrite the Park vector of the voltage in polar coordinates:
-
-$$\bar { v } = v \, e ^ { \wp \theta } = e ^ { ( u + \wp \theta ) }$$
+$$\bar { v } = v \, e ^ { j \theta } = e ^ { ( u + j \theta ) }$$
 
 where u = ln( v ).
 
@@ -168,7 +155,23 @@ $$\bar { \eta } = \frac { d } { d t } ( u + j \theta ) = u ^ { \prime } + j \the
 
 Let us rewrite the Park vector of the voltage in polar coordinates:
 
-$$\bar { v } = v \, e ^ { \wp \theta } = e ^ { ( u + \wp \theta ) }$$
+$$\bar { v } = v \, e ^ { j \theta } = e ^ { ( u + j \theta ) }$$
+
+where u = ln( v ).
+
+Then, the complex frequency is defined as follows:
+
+$$\bar { \eta } = \frac { d } { d t } ( u + j \theta ) = u ^ { \prime } + j \theta ^ { \prime } = \rho + j \omega \, ,$$
+
+<!-- image -->
+
+<!-- image -->
+
+## Complex Frequency
+
+Let us rewrite the Park vector of the voltage in polar coordinates:
+
+$$\bar { v } = v \, e ^ { j \theta } = e ^ { ( u + j \theta ) }$$
 
 where u = ln( v ).
 
@@ -875,7 +878,7 @@ Therefore:
 
 For a single-cage induction machine:
 
-$$\bar { \xi } _ { \bar { a } } & = - \frac { r ^ { \prime } } { r } \left ( \frac { r ^ { 2 } ( x _ { t } ^ { 2 } - x ^ { 2 } ) + j \, r x _ { \mu } ( r ^ { 2 } - x ^ { 2 } - x _ { \mu } x ) } { z ^ { 2 } ( r ^ { 2 } + x _ { t } ^ { 2 } ) } \right ) , \\ \bar { \kappa } _ { \rho } & = 1 , \quad \bar { \kappa } _ { \omega } = \jmath .$$
+$$\bar { \xi } _ { \bar { \imath } } & = - \frac { r ^ { \prime } } { r } \left ( \frac { r ^ { 2 } ( x _ { t } ^ { 2 } - x ^ { 2 } ) + j \, r x _ { \mu } ( r ^ { 2 } - x ^ { 2 } - x _ { \mu } x ) } { z ^ { 2 } ( r ^ { 2 } + x _ { t } ^ { 2 } ) } \right ) , \\ \bar { \kappa } _ { \rho } & = 1 , \quad \bar { \kappa } _ { \omega } = \jmath .$$
 
 The sought expression for ¯ χ is:
 

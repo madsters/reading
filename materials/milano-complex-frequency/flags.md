@@ -7,20 +7,23 @@ items below come from a manual review pass, not automated grading — treat them
 *flag-driven confirmation targets*.
 
 ## Formula-recognition misreads (confirm before trusting)
-The CodeFormula model recovered most equations well, but made systematic symbol errors:
+The CodeFormula model recovered most equations well but made systematic symbol errors.
+**`resolve-sources` fetched the foundational paper's LaTeX (arXiv:2105.07769, in `refs/`)
+and reconciled these against ground truth:**
 
-1. **Imaginary unit inconsistent.** Rendered as `\jmath` (ȷ), `j`, and — wrongly — as
-   `\wp` (Weierstrass ℘) in the *same* role. E.g. line 117 `\bar v = v_d + \jmath v_q`
-   (correct) vs line 127 `\bar v = v\,e^{\wp\theta}` (should be `e^{j\theta}`). Everywhere
-   `\wp` appears in an exponent/derivative it means the **imaginary unit j**.
-2. **Power definition symbol.** Line 101/113: `\bar s = \bar v \circ \bar a^*`. The
-   `\bar a` is almost certainly a misread of the **complex current ī** — complex power is
-   $\bar s = \bar v \circ \bar\imath^{\,*}$, consistent with lines 207/241 which use ī.
-3. **Garbled high-order model equations.** Slides around lines 774 and 784 (xth-order
-   machine model) contain OCR-level corruption: `\int\limits_{\}eq`, inconsistent
-   subscripts (`x_{2d}` vs `x_{1d}`, a stray `x_{aq}`), and mismatched brackets. Do **not**
-   trust these two equations verbatim; cross-check against the source PDF / arXiv:2105.07769
-   before using them.
+1. ✅ **RESOLVED — imaginary unit.** Rendered as `\jmath`, `j`, and wrongly as `\wp`
+   (Weierstrass ℘) in the same role. Source defines `\jj = \jmath` (macro, line 112) as
+   the imaginary unit. All `\wp` in `material.md` corrected to **`j`** (8 occurrences).
+2. ✅ **RESOLVED — power definition.** Line 101/113 `\bar s = \bar v \circ \bar a^*`: the
+   `\bar a` was a misread of the **complex current ī**. Source (line 282):
+   $\bar s = \bar v \circ \bar\imath^{*}$. Corrected in `material.md` (3 occurrences).
+3. ⚠️ **OPEN — garbled high-order machine model** (material.md ~lines 774/784). OCR
+   corruption: `\int\limits_{\}eq`, inconsistent subscripts (`x_{2d}` vs `x_{1d}`, stray
+   `x_{aq}`), subtransient states `\psi'_{2d}` and `\gamma` coefficients. The foundational
+   paper gives only the **4th-order** model ($R_a$, $X'_d$, $X'_q$, $e'_{d,q}$; eq. `syn`,
+   line ~1276) — clean but lower-order than the deck's. The deck's higher-order model is
+   **not in arXiv:2105.07769**, so it stays flagged: cross-check against the extended
+   machine-model reference the deck used.
 
 ## Structural artifact — Beamer overlay duplication
 The 127 "pages" include many **overlay frames of the same logical slide** (progressive
