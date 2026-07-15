@@ -58,8 +58,11 @@ Milano's programme: \emph{Complex Frequency} (TPWRS 2022, arXiv:2105.07769) $\to
 \emph{Transient Slack Capability} (2025).
 
 \section*{Relevance to my work}
-A control/stability framing for grid-forming converters and inverter-based resources in
-low-inertia systems --- directly applicable to inverter/converter modelling; the
-constant-power/admittance/current special cases are ready-made device behaviours.
+Speaks to \texttt{effective\_inertia}: $\cb\eta=\rho+j\omega$ and RoCoP split power-rate into
+voltage ($\rho$) and frequency ($\omega$) parts --- a language for the fast-response
+\emph{offset} beyond $H_{\rm load}$ and for $r=H_{\rm eff}/H_{\rm load}$ (Milano's
+stored-vs-delivered gap). $\rho=\dot v/v$ is exactly your CMLD voltage-response / feeder
+question; $\cb\chi=\cb\xi-\cb\eta$ + local sync formalise the motor slip--torque coupling.
+Continuous framing --- \emph{not} \texttt{pv\_trip}'s discrete 49.5/49\,Hz switching.
 \end{multicols}
 \end{document}
