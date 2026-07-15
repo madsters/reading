@@ -1,11 +1,10 @@
 ---
 learning_mode: on          # off disables all probing and adaptation
-owner: template            # replace on your private branch (e.g. maddy-learning)
+owner: maddy
 ---
 
 # Maths background
 
-Blank template. `main` ships this empty; your real profile lives on a private branch.
 Concepts move `not-yet → learning → known` as you demonstrate or declare understanding.
 The `ingest` skill probes only *new* concepts per material; Phase B updates this
 conversationally.
@@ -14,13 +13,34 @@ Each row: **concept** | status | confidence | provenance | last-updated
 (provenance = self-reported | demonstrated).
 
 ## Known
-<!-- e.g. | eigen-decomposition | known | high | demonstrated | 2026-01-10 | -->
+| concept | status | confidence | provenance | last-updated |
+|---|---|---|---|---|
+| phasors & analytic signals | known | med | self-reported | 2026-07-15 |
+| admittance (Y-bus) matrix | known | med | self-reported | 2026-07-15 |
+| DAE modelling (z'=f, 0=g) | known | med | self-reported | 2026-07-15 |
+| grid-forming vs grid-following (concept) | known | med | self-reported | 2026-07-15 |
+| RoCoF / frequency stability | known | med | self-reported | 2026-07-15 |
+| local synchronization (general term) | known | low | self-reported | 2026-07-15 |
 
 ## Learning
-<!-- partial understanding; the level to pitch expansions at -->
+| concept | status | confidence | provenance | last-updated | note |
+|---|---|---|---|---|---|
+| complex power S = V I* | learning | low | self-reported | 2026-07-15 | "kinda familiar" |
+| GFM/GFL exact dynamics | learning | low | self-reported | 2026-07-15 | gets concept, not the detailed device dynamics |
 
 ## Not yet
-<!-- gaps; drive prerequisite-gap warnings and suggested learning order -->
+| concept | status | provenance | last-updated | first seen in |
+|---|---|---|---|---|
+| Park / dq transform | not-yet | self-reported | 2026-07-15 | milano-complex-frequency |
+| Hadamard product (∘) | not-yet | self-reported | 2026-07-15 | milano-complex-frequency |
+| synchronous machine dq dynamics | not-yet | self-reported | 2026-07-15 | milano-complex-frequency |
+| small-signal / eigenvalue stability | not-yet | self-reported | 2026-07-15 | milano-complex-frequency |
+| complex frequency (η = ρ + jω) | not-yet | self-reported | 2026-07-15 | milano-complex-frequency |
+
+## Prerequisite chains observed
+- **complex frequency (η=ρ+jω)** ⟸ builds on *complex power* (learning) + *Park/dq
+  transform* (not-yet). Suggested order to unlock the deck's core: Park/dq → solidify
+  complex power → complex frequency. Hadamard product is a quick, isolated fix.
 
 ## Notation conventions I use
-<!-- e.g. bold lowercase = vector, bold uppercase = matrix, hat = estimate -->
+<!-- add as they come up -->

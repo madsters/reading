@@ -1,0 +1,20 @@
+{
+  "source": "deck-references",
+  "note": "Web-search fallback backend was unavailable at build time (deprecated duckduckgo_search returned irrelevant namesake results). Context built from the deck's own Section 6 References instead, which is the higher-quality source. See flags.md.",
+  "hints": ["Federico Milano", "University College Dublin", "PSCC 2026 Tutorial"],
+  "core_references": [
+    {"title": "Complex Frequency", "authors": "F. Milano", "venue": "IEEE TPWRS 37(2):1230-1240", "year": 2022, "arxiv": "2105.07769", "role": "foundational"},
+    {"title": "A Geometrical Interpretation of Frequency", "authors": "F. Milano", "venue": "IEEE TPWRS 37(1):816-819", "year": 2022, "arxiv": null, "role": "grounding"},
+    {"title": "Local Synchronization of Power System Devices", "authors": "I. Ponce, F. Milano", "venue": "IEEE TPWRS 40(5):4194-4204", "year": 2025, "arxiv": "2407.02661", "role": "section-3"},
+    {"title": "Dual Grid-Forming Converter", "authors": "F. Milano", "venue": "IEEE TPWRS 40(2):1993-1996", "year": 2025, "arxiv": "2408.13185", "role": "section-5-application"},
+    {"title": "Transient Slack Capability", "authors": "R. Bernal, F. Milano", "venue": "arXiv", "year": null, "arxiv": "2505.17984", "role": "section-4"}
+  ],
+  "further_reading": [
+    {"title": "Taxonomy of Power Converter Control Schemes based on the Complex Frequency Concept", "authors": "Moutevelis, Roldan-Perez, Prodanovic, Milano", "arxiv": "2209.11107"},
+    {"title": "A Complex Frequency-Based Control for Inverter-Based Resources", "authors": "R. Bernal, F. Milano", "arxiv": "2501.00448"},
+    {"title": "Coherency among Power System Devices", "authors": "I. Ponce, R. Bernal, F. Milano", "arxiv": "2511.02486"},
+    {"title": "Analytical Framework for Power System Strength", "authors": "I. Ponce, F. Milano", "arxiv": "2507.16061"},
+    {"title": "Equivalence between Geometric Frequency and Lagrange Derivative", "authors": "F. Milano", "arxiv": "2410.02340"},
+    {"title": "Quasi Steady-State Frequency", "authors": "Gutierrez Florensa, Ortega, Sigrist, Milano", "arxiv": "2505.21461"}
+  ]
+}
