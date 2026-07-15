@@ -17,7 +17,9 @@ right and a forcing function for a tight summary.
 Copy the template to `materials/<slug>/onepager.tex`.
 
 ## Draft to the limits
-Fill the template from `material.md`, `context.md`, `verify.md`, and `assumptions.md`.
+Fill the template from `material.md`, `context.md`, `verify.md`, and `assumptions.md`. For
+the **relevance** box, pull from `context.md`'s "relevance to my work" and
+`profile/current-work.md` — name the reader's active threads, don't generalise.
 Respect the template's per-box character/length limits — the constraint is the point.
 Include the load-bearing equations verbatim (source-first fidelity), and note any
 verification discrepancies rather than hiding them.

@@ -118,7 +118,9 @@ citation-graph identity, **fall back to web search**, seeded by any hints you ga
 start of the run — an author, research group, or source name lets the search find that
 group's related publications, the course or origin, and where this material sits in their
 body of work. LLM writes `context.md`: lineage, contribution, positioning. Honestly
-records in `flags.md` when context couldn't be established.
+records in `flags.md` when context couldn't be established. The **"relevance to my work"**
+section is grounded in `profile/current-work.md` — tying the material to the reader's
+*named* active threads and open questions, not to the field in general.
 
 **3b. Resolve sources** *(script + LLM, conditional).* Fires automatically when a converted
 material has **flagged low-confidence equations** *and* a **core reference on arXiv**: fetch
@@ -184,7 +186,8 @@ reading/
 │   ├── onepager_paper.tex        # paper layout
 │   └── onepager_digest.tex       # tutorial / document layout
 ├── profile/
-│   └── maths-background.md        # learner profile (blank on main; real data on maddy-learning)
+│   ├── maths-background.md        # learner profile (blank on main; real data on maddy-learning)
+│   └── current-work.md           # standing description of active research (grounds "relevance")
 ├── materials/
 │   └── <slug>/
 │       ├── source/               # raw .tex / PDF / pptx + extracted slide images

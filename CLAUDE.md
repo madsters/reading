@@ -31,8 +31,11 @@ When answering questions about a material, you MUST:
    the ladder, dated) — e.g. `followed → intuitive` once they can relate it to their work.
 5. **Trust the verification.** If `verify.md` flags a discrepancy in an equation, say so
    when that equation comes up — don't smooth over it.
-6. **Relate to their work.** Where relevant, connect the material to the user's existing
-   notes and active projects (see the "relevance" sections in `context.md`).
+6. **Relate to their work.** Read `profile/current-work.md` and connect the material to the
+   reader's **named active threads and open questions** — specifically, not to the field in
+   general (see the "relevance to my work" section in `context.md`). When a concept maps
+   onto a quantity or method they're using, say which and how; if nothing genuinely
+   connects, say so rather than forcing it.
 
 ## Honesty
 `flags.md` records what couldn't be read or contextualised. Respect it: don't present

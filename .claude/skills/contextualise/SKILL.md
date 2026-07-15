@@ -20,8 +20,14 @@ Situate the material. Stage 3 of Phase A. Two branches, one honest output.
 ## Write context.md
 From `context.json`, write `context.md`: the problem lineage, the core contribution, how
 later work received it (papers) or where it fits in the source's body of work (fallback).
-Then add a **"relevance to your work"** paragraph relating it to the user's existing notes
-and active projects.
+
+Then add a **"relevance to my work"** section — and make it *specific*. Read
+`profile/current-work.md` and tie the material to the reader's **named active threads and
+open questions**, not to the field in general. Good relevance says "this connects to your
+`effective_inertia` study's delivered-vs-stored question because …"; bad relevance says
+"this is relevant to power systems." Where a concept in the material maps onto a quantity
+or method the reader is using, say so and how. If nothing genuinely connects, say that
+plainly rather than forcing it.
 
 ## Honesty
 If neither branch yields usable context, do **not** invent lineage. Write "context could
