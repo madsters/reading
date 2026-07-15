@@ -2,7 +2,7 @@
 """Convert a general document (.docx and friends) to markdown.
 
 Path for the `document` profile — reports, notes, anything that isn't a paper or
-a deck. Prefers a converter that preserves equations; falls back to pandoc.
+a deck. Uses Docling (equation-preserving); it handles docx/pptx/html/md natively.
 
     python convert_doc.py report.docx --out materials/<slug>
 """
@@ -12,20 +12,7 @@ import argparse
 import json
 from pathlib import Path
 
-
-def convert(doc: Path, out: Path) -> dict:
-    """Return {markdown_path, flags_path}.
-
-    Sketch:
-      1. .docx -> markdown via pandoc (--from docx --to gfm --mathjax) or a
-         math-preserving converter; write out/material.md.
-      2. If the doc embeds images/equations as pictures, hand those to the
-         math-aware path (convert_pdf-style) and flag as low-confidence.
-      3. Write any doubtful regions to out/flags.json for flag-driven review.
-    """
-    out.mkdir(parents=True, exist_ok=True)
-    # TODO: pandoc/docling conversion -> out/material.md (+ flags.json)
-    raise NotImplementedError("convert_doc: wire up docx->md conversion")
+from docling_convert import convert_with_docling
 
 
 def main() -> None:
@@ -33,7 +20,7 @@ def main() -> None:
     ap.add_argument("doc", type=Path)
     ap.add_argument("--out", type=Path, required=True)
     args = ap.parse_args()
-    print(json.dumps(convert(args.doc, args.out), indent=2))
+    print(json.dumps(convert_with_docling(args.doc, args.out), indent=2))
 
 
 if __name__ == "__main__":

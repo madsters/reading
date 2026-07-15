@@ -2,34 +2,47 @@
 """Compile a filled one-pager template to PDF and assert it's exactly one page.
 
 The one-page guarantee is compile-and-check, not vibes: if the draft overflows,
-this fails loudly so the LLM trims and retries. Template is profile-aware —
-onepager_paper.tex for papers, onepager_digest.tex for tutorials/documents.
+this fails loudly (non-zero exit) so the LLM trims and retries. Template is
+profile-aware — the caller picks onepager_paper.tex or onepager_digest.tex.
 
     python build_onepager.py materials/<slug>/onepager.tex --out materials/<slug>/onepager.pdf
 """
 from __future__ import annotations
 
 import argparse
+import shutil
 import subprocess
 import sys
 from pathlib import Path
 
+from pypdf import PdfReader
+
 
 def page_count(pdf: Path) -> int:
-    """Sketch: `pdfinfo <pdf>` -> parse 'Pages:' line (or use pypdf)."""
-    raise NotImplementedError
+    return len(PdfReader(str(pdf)).pages)
+
+
+def _compile(tex: Path, outdir: Path) -> None:
+    """Prefer tectonic (single binary, auto-fetches packages); fall back to latexmk."""
+    if shutil.which("tectonic"):
+        cmd = ["tectonic", str(tex), "--outdir", str(outdir)]
+    elif shutil.which("latexmk"):
+        cmd = ["latexmk", "-pdf", f"-outdir={outdir}", str(tex)]
+    else:
+        sys.exit("no LaTeX engine found (install tectonic or latexmk)")
+    proc = subprocess.run(cmd, capture_output=True, text=True)
+    if proc.returncode != 0:
+        sys.exit(f"LaTeX compile failed:\n{proc.stdout[-2000:]}\n{proc.stderr[-2000:]}")
 
 
 def build(tex: Path, out: Path) -> None:
-    """Compile with a single-binary LaTeX engine, then assert one page.
+    out.parent.mkdir(parents=True, exist_ok=True)
+    _compile(tex, out.parent)
 
-    Sketch:
-      1. subprocess.run(["tectonic", str(tex), "--outdir", out.parent]) — or the
-         installed engine; check=True and surface the log on failure.
-      2. n = page_count(out); if n != 1: raise SystemExit(f"overflow: {n} pages")
-         so the caller knows to trim.
-    """
-    # TODO: compile tex -> out
+    produced = out.parent / (tex.stem + ".pdf")
+    if produced != out and produced.exists():
+        produced.replace(out)
+
     n = page_count(out)
     if n != 1:
         sys.exit(f"one-pager is {n} pages, not 1 — trim and recompile")

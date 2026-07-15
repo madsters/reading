@@ -50,7 +50,11 @@ forward from `main` as the tool evolves.
 
 ## Install
 
-You provide the tooling: a LaTeX toolchain + `latexpand`, a math-aware PDF converter,
-`python-pptx` (+ a headless renderer for slide images), a docx→markdown converter,
-`requests`, `sympy`, and a static file server if you want terminal-phase HTML rendering.
-See `reading-assistant-plan.md` for where each is used.
+```
+pip install -r requirements.txt
+```
+
+Plus three system tools (not on PyPI): **LibreOffice** (headless slide→PDF rendering),
+**tectonic** or **latexmk** (one-pager compilation), and **latexpand** (flattening
+multi-file LaTeX source). See `requirements.txt` for what each Python package is used for,
+and `reading-assistant-plan.md` for the full design.

@@ -1,0 +1,16 @@
+# Python dependencies for the Phase A build pipeline.
+#   pip install -r requirements.txt
+#
+# System tools (install separately, not via pip):
+#   - LibreOffice        headless slide -> PDF rendering (extract_slides.py)
+#   - tectonic OR latexmk one-pager compilation (build_onepager.py)
+#   - latexpand          flatten multi-file LaTeX source (fetch_arxiv_source.py)
+
+pypdf>=4.0             # PDF inspection + page counting
+requests>=2.31         # arXiv e-print download, Semantic Scholar API
+python-pptx>=0.6.23    # slide text + speaker notes
+PyMuPDF>=1.23          # render slide PDF pages to PNG (fitz)
+docling>=2.0           # math-aware PDF/DOCX -> markdown with confidence grades
+duckduckgo-search>=6.0 # web-search context fallback
+sympy>=1.12            # equation verification harness
+markdown>=3.5          # Q&A markdown -> HTML (terminal-phase rendering)
