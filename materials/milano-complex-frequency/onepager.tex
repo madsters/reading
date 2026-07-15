@@ -1,0 +1,65 @@
+% One-pager digest — Milano complex-frequency PSCC 2026 tutorial.
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=1.4cm]{geometry}
+\usepackage{amsmath,amssymb,bm}
+\usepackage{multicol}
+\usepackage{enumitem}
+\setlist{nosep,leftmargin=1.2em}
+\usepackage{titlesec}
+\titleformat{\section}{\bfseries\small}{}{0pt}{}
+\titlespacing{\section}{0pt}{4pt}{2pt}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+
+\newcommand{\cb}[1]{\bar{#1}}
+
+\begin{document}
+{\large\bfseries Complex Frequency, Local Synchronization \& Transient Slack Capability}\\[-2pt]
+{\footnotesize PSCC 2026 Tutorial \hfill Federico Milano (UC Dublin) \hfill Low-inertia power systems}
+\hrule\vspace{4pt}
+
+\section*{In one line}
+One complex quantity $\cb\eta=\rho+j\omega$ fuses the rate of change of a bus voltage's
+\emph{magnitude} ($\rho$) and its \emph{angular frequency} ($\omega$), giving a single
+language for the dynamics, stability and synchronization of converter-dominated grids.
+
+\begin{multicols}{2}
+\section*{Key ideas}
+\begin{itemize}
+\item \textbf{Complex frequency:} with $\cb v = v\,e^{\,u+j\theta}$ ($u=\ln v$),
+  $$\cb\eta=\tfrac{d}{dt}(u+j\theta)=\rho+j\omega,\quad \rho=\dot v/v,\ \omega=\dot\theta.$$
+\item \textbf{Complex power} $\cb s=\cb v\circ\cb\imath^{*}=p+jq$, with rate of change (RoCoP)
+  $\cb s' = \cb\eta\,\cb s + \cb v\circ\cb\imath'^{*}$.
+\item \textbf{Local synchronization:} a grid-side view of synchronism --- device is
+  synchronized when $\rho\!\to\!0$ and $\omega\!\to\!\omega_r$ (bounded/asymptotic, BLS/ALS).
+\item \textbf{Transient Slack Capability (TSC):} what a device needs to sustain the grid
+  after a large disturbance; realised by the \textbf{Dual grid-forming converter}.
+\end{itemize}
+
+\section*{Concept map}
+Park vectors $\to$ $\cb\eta$ (complex freq.) $\to$ RoCoP $\cb s'$ $\to$ device component
+$\cb\chi=\cb\xi-\cb\eta$ $\to$ local sync (BLS/ALS) $\to$ TSC $\to$ Dual-GFM application.
+
+\section*{Worked takeaways (verified)}
+\begin{itemize}
+\item $\cb v' = \cb v\circ\cb\eta$;\ \ $\cb\imath'=\cb\eta\,\cb\imath$ (constant $\cb Y$).
+\item RoCoP: $\cb s' = \cb\eta\,\cb s + \cb v\circ\cb\imath'^{*}$.
+\item General component: $\cb\imath'=\cb\imath(\cb\chi+\cb\eta)\Rightarrow \cb\chi=\cb\xi-\cb\eta$.
+\end{itemize}
+\emph{Why $\rho,\omega$ combine:} both are $[\text{time}]^{-1}$ (see \texttt{verify.md}).
+
+\section*{Prerequisites (your profile)}
+Park/dq transform \& Hadamard $\circ$ (\texttt{seen}); complex power (\texttt{followed});
+target for $\cb\eta$ itself: \texttt{followed}$\to$\texttt{intuitive}.
+
+\section*{Where it fits}
+Milano's programme: \emph{Complex Frequency} (TPWRS 2022, arXiv:2105.07769) $\to$
+\emph{Local Synchronization} (Ponce \& Milano 2025) $\to$ \emph{Dual-GFM} \&
+\emph{Transient Slack Capability} (2025).
+
+\section*{Relevance to my work}
+A control/stability framing for grid-forming converters and inverter-based resources in
+low-inertia systems --- directly applicable to inverter/converter modelling; the
+constant-power/admittance/current special cases are ready-made device behaviours.
+\end{multicols}
+\end{document}

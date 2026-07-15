@@ -1,0 +1,57 @@
+[
+  {
+    "eq_ref": "Current derivative, constant admittance (slide 'Constant Admittance', ~line 449): i' = eta*i",
+    "results": {
+      "rederive": {
+        "status": "pass"
+      }
+    }
+  },
+  {
+    "eq_ref": "Rate of Change of Power / RoCoP (line 263): s' = eta*s + v*conj(i')",
+    "results": {
+      "rederive": {
+        "status": "pass"
+      }
+    }
+  },
+  {
+    "eq_ref": "General RoCoP component (line 648): i' = i*(chi+eta), whence chi = xi - eta",
+    "results": {
+      "rederive": {
+        "status": "pass"
+      }
+    }
+  },
+  {
+    "eq_ref": "Complex frequency eta = rho + j*omega (line 145): rho and omega are dimensionally compatible (both 1/time) - why they combine",
+    "results": {
+      "dimensions": {
+        "status": "pass",
+        "detail": "both sides ~ {Dimension(time, T): -1}"
+      }
+    }
+  },
+  {
+    "eq_ref": "Local synchronization condition (line 804): -rho + (omega_r - omega) -> 0  <=>  rho->0 and omega->omega_r",
+    "results": {
+      "limits": {
+        "status": "pass",
+        "detail": [
+          {
+            "expr": "-rho + (omega_r - omega)",
+            "value": "0.0",
+            "expected": 0,
+            "ok": true
+          },
+          {
+            "expr": "-rho + (omega_r - omega)",
+            "value": "0.9",
+            "expected": 0.9,
+            "ok": true
+          }
+        ]
+      }
+    }
+  }
+]
