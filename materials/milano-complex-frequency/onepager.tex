@@ -58,11 +58,12 @@ Milano's programme: \emph{Complex Frequency} (TPWRS 2022, arXiv:2105.07769) $\to
 \emph{Transient Slack Capability} (2025).
 
 \section*{Relevance to my work}
-Speaks to \texttt{effective\_inertia}: $\cb\eta=\rho+j\omega$ and RoCoP split power-rate into
-voltage ($\rho$) and frequency ($\omega$) parts --- a language for the fast-response
-\emph{offset} beyond $H_{\rm load}$ and for $r=H_{\rm eff}/H_{\rm load}$ (Milano's
-stored-vs-delivered gap). $\rho=\dot v/v$ is exactly your CMLD voltage-response / feeder
-question; $\cb\chi=\cb\xi-\cb\eta$ + local sync formalise the motor slip--torque coupling.
-Continuous framing --- \emph{not} \texttt{pv\_trip}'s discrete 49.5/49\,Hz switching.
+For \texttt{effective\_inertia}: the deck's TSC (port-Hamiltonian) separates stored energy
+$H_k$ (Cond.\,1) from the dynamic slack to sustain $\Delta P$ (Cond.\,2) --- structurally the
+same storage-vs-delivery split as your $H_{\rm load}$ vs $H_{\rm eff}$ / $r$ (that framing is
+yours). $\cb\eta=\rho+j\omega$: you measure the $\omega$ (RoCoF) side --- computing $\rho=\dot
+v/v$ too (you already log $v_{\rm rms}$) could attribute your $\sim$0.2\,s offset to voltage
+vs frequency; $\rho$ is also your CMLD voltage-response / feeder question. Low-inertia/IBR
+displacement + Dual-GFM motivate the setting.
 \end{multicols}
 \end{document}

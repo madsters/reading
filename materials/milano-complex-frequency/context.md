@@ -41,38 +41,39 @@ Foundational and directly-building work, all Milano-group:
   power-system-strength framings (arXiv:2511.02486, 2507.16061).
 
 ## Relevance to my work
-Grounded in `profile/current-work.md` — this connects to specific active threads, not just
-"power systems":
+Grounded in `profile/current-work.md` and the corpus. Each link cites where in the deck it
+comes from, and keeps clear what is *Milano's* framing vs *your* study's.
 
-- **`effective_inertia` (your paper-facing study) ↔ complex frequency + RoCoP.** Your core
-  finding is $H_{\text{eff}} \approx H_{\text{load}} + \text{offset}$, where the ~0.2–0.25 s
-  offset is a *fast frequency response* beyond pure stored inertia. Milano's
-  $\bar\eta=\rho+j\omega$ splits a device's response into a **voltage-magnitude rate $\rho$**
-  and an **angular-frequency rate $\omega$**, and the RoCoP relation $\bar s' = \bar\eta\,\bar
-  s + \bar v\circ\bar\imath'^{*}$ decomposes the *rate of change of power* into a
-  complex-frequency-driven term plus a current-variation term. That is a candidate analytic
-  language for the very thing you're trying to separate: the ω-part is your inertial RoCoF
-  response, the ρ-part is the voltage-driven fast response your offset lumps in. Milano's own
-  "From Stored Energy to Delivered Response" framing is the same stored-vs-delivered gap as
-  your $r = H_{\text{eff}}/H_{\text{load}}$. **Concrete idea:** logging $\rho$ and $\omega$
-  separately (you already log `vrms_pu` and `freq_hz`) might let you attribute the offset to
-  voltage vs frequency instead of leaving it as one lumped term.
-- **Induction-motor slip–torque coupling ↔ local synchronization / $\bar\chi=\bar\xi-\bar\eta$.**
-  Your motors couple to grid frequency via slip with a first-order lag $\tau(H)\approx$70–170 ms.
-  Milano's device-side component $\bar\chi=\bar\xi-\bar\eta$ (current growth rate vs grid
-  complex frequency) and the local-sync condition $\rho\to0,\ \omega\to\omega_r$ formalise how
-  a device tracks the grid — a possibly cleaner handle on your response factor $r$ than
-  window-dependent RoCoF differencing.
-- **CMLD voltage-dependent response + feeder aggregation ↔ $\rho$.** Your open question —
+- **`effective_inertia`: stored vs delivered.** *Your* study draws the distinction between
+  stored energy `H_load` (an upper bound) and delivered `H_eff`, and calibrates
+  `r = H_eff/H_load` — that stored-vs-delivered framing is from your draft paper, not this
+  deck. What the deck independently offers (§Transient Slack Capability, material.md
+  lines 1366–1451) is a **technology-agnostic structure for the same split**: a
+  port-Hamiltonian device with stored energy `H_k` (eq. 31), whose **Condition 1 — Energy
+  Storage Capacity** (`H_k` positive semi-definite; examples: rotating-mass KE for an SM,
+  DC-link capacitor energy for an IBR) is separated from **Condition 2 — Dynamic Slack**,
+  the source dynamics needed to actually *sustain* power under a prolonged ΔP. That
+  storage-vs-sustained-delivery split is structurally what your `r` measures empirically for
+  induction-motor load — so the deck may give a formal (pH) language to frame your result,
+  while your `r` is the measurement it lacks.
+
+- **Complex frequency `η = ρ + jω` ↔ how you measure and decompose the response** (def. at
+  material.md line 145; RoCoP `s' = η·s + v∘i'*` at line 263). You extract `H_eff` from
+  RoCoF — the **ω** side. The deck treats **ρ = v̇/v** (voltage-magnitude rate) as a
+  co-equal channel. Since you already log `freq_hz` *and* `vrms_pu`, computing ρ and ω
+  separately is a concrete way to test whether your ~0.2–0.25 s offset is voltage-driven,
+  frequency-driven, or both — rather than leaving it as one lumped term. (This is a proposed
+  use of the deck's decomposition, not a claim the deck makes about loads.)
+
+- **CMLD voltage-dependent response + feeder aggregation ↔ ρ.** Your open question —
   aggregate feeder impedance → voltage drop → CMLD voltage-dependent response → frequency
-  contribution — is exactly what $\rho=\dot v/v$ captures dynamically. Complex frequency gives
-  a unified $(\rho,\omega)$ treatment of the coupled voltage+frequency load response, useful
-  when you state and test the feeder-aggregation assumption's effect on frequency.
-- **`pv_trip` / DER_A backlog ↔ Dual-GFM & grid-forming.** Milano's Dual-GFM application (§5)
-  and the local-synchronization criteria bear on your planned electrical **DER_A** and the
-  grid-forming/-following framing behind your DER-trip scenarios.
+  contribution — is exactly the voltage-magnitude dynamics ρ captures. The deck's unified
+  (ρ, ω) view is a candidate lens for stating and testing the feeder-aggregation assumption's
+  effect on the load's frequency contribution.
 
-**Caveat:** Milano's framework is continuous/analytic (complex frequency of smooth signals),
-so it speaks to your *inertia/response* work — **not** to `pv_trip`'s discrete, path-dependent
-protection switching (49.5 Hz DER trip, 49.0 Hz UFLS), which its smooth formulation doesn't
-capture.
+- **Low-inertia motivation & DER.** The deck opens (line 1358) on IBR displacing physical
+  rotational inertia — the regime your whole thesis addresses — and its Dual-GFM application
+  (§5) and TSC metric concern whether a device can sustain the grid under a prolonged
+  imbalance, which connects to your `DER_A` modelling and, thematically, to the ride-through
+  question behind `pv_trip` (note `pv_trip` itself is framed around AEMO's operational
+  49.5 Hz DER-trip / 49.0 Hz UFLS thresholds — an operational lens the deck doesn't address).
