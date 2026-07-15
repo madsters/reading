@@ -22,8 +22,14 @@ def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("pdf", type=Path)
     ap.add_argument("--out", type=Path, required=True)
+    ap.add_argument("--no-ocr", action="store_true",
+                    help="skip OCR (use for born-digital PDFs with a text layer)")
+    ap.add_argument("--no-formula", action="store_true",
+                    help="skip formula->LaTeX enrichment")
     args = ap.parse_args()
-    print(json.dumps(convert_with_docling(args.pdf, args.out), indent=2))
+    print(json.dumps(convert_with_docling(
+        args.pdf, args.out, do_ocr=not args.no_ocr, do_formula=not args.no_formula),
+        indent=2))
 
 
 if __name__ == "__main__":

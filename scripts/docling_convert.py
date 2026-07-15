@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
 """Shared Docling conversion helper: file -> markdown + confidence flags.
 
-Used by convert_pdf.py and convert_doc.py. Docling emits real LaTeX for formulae
-(so boldedness/notation largely survive) and exposes per-page confidence grades,
-which we turn into an honest flags list rather than silently trusting the output.
+Used by convert_pdf.py and convert_doc.py. Docling can recover formulae as LaTeX
+(so boldedness/notation survive) — but only with formula enrichment turned ON,
+which is off by default. We enable it here, since maths fidelity is the whole
+point. OCR is toggleable: leave it on for scanned input, turn it off for
+born-digital PDFs (a clean text layer) to save a lot of time.
+
+Per-page confidence grades become an honest flags list rather than silent trust.
 """
 from __future__ import annotations
 
@@ -13,6 +17,19 @@ from pathlib import Path
 
 # Grades Docling assigns; POOR/FAIR are worth surfacing to the user.
 LOW_GRADES = {"POOR", "FAIR"}
+
+
+def _build_converter(do_ocr: bool, do_formula: bool):
+    from docling.datamodel.base_models import InputFormat
+    from docling.datamodel.pipeline_options import PdfPipelineOptions
+    from docling.document_converter import DocumentConverter, PdfFormatOption
+
+    opts = PdfPipelineOptions()
+    opts.do_ocr = do_ocr
+    opts.do_formula_enrichment = do_formula  # equations -> LaTeX (CodeFormulaV2)
+    return DocumentConverter(
+        format_options={InputFormat.PDF: PdfFormatOption(pipeline_options=opts)}
+    )
 
 
 def _confidence_flags(result) -> list[dict]:
@@ -35,25 +52,22 @@ def _heuristic_flags(md: str) -> list[dict]:
     """Cheap sanity checks on the markdown itself."""
     flags: list[dict] = []
     for i, line in enumerate(md.splitlines(), start=1):
-        # Unbalanced inline-math delimiters usually mean a botched equation.
         if line.count("$") % 2 == 1:
             flags.append({"line": i, "kind": "unbalanced-math",
                           "reason": "odd number of '$' on line",
                           "snippet": line.strip()[:120]})
-        # A run of replacement/garbled characters.
-        if re.search(r"[�]{1,}", line):
+        if re.search(r"[�]", line):
             flags.append({"line": i, "kind": "garbled",
                           "reason": "replacement characters present",
                           "snippet": line.strip()[:120]})
     return flags
 
 
-def convert_with_docling(src: Path, out: Path) -> dict:
+def convert_with_docling(src: Path, out: Path, do_ocr: bool = True,
+                         do_formula: bool = True) -> dict:
     """Convert `src` to out/material.md, writing out/flags.json. Returns paths."""
-    from docling.document_converter import DocumentConverter
-
     out.mkdir(parents=True, exist_ok=True)
-    result = DocumentConverter().convert(str(src))
+    result = _build_converter(do_ocr, do_formula).convert(str(src))
     md = result.document.export_to_markdown()
 
     md_path = out / "material.md"
@@ -64,4 +78,4 @@ def convert_with_docling(src: Path, out: Path) -> dict:
     flags_path.write_text(json.dumps(flags, indent=2))
 
     return {"markdown_path": str(md_path), "flags_path": str(flags_path),
-            "n_flags": len(flags)}
+            "n_flags": len(flags), "do_ocr": do_ocr, "do_formula": do_formula}

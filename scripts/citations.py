@@ -64,19 +64,42 @@ def by_identity(paper_id: str) -> dict:
     }
 
 
-def by_search(hints: str, max_results: int = 8) -> dict:
-    """Web-search fallback seeded by author/group/source hints."""
-    from duckduckgo_search import DDGS
+def _ddgs():
+    try:                                  # package was renamed duckduckgo_search -> ddgs
+        from ddgs import DDGS
+    except ImportError:
+        from duckduckgo_search import DDGS
+    return DDGS()
 
+
+def _quote(term: str) -> str:
+    """Quote multi-word terms so the engine keeps them intact ('Federico Milano')."""
+    return f'"{term}"' if " " in term else term
+
+
+def by_search(hints: str, max_results: int = 8) -> dict:
+    """Web-search fallback seeded by author/group/source hints.
+
+    The first hint is treated as the primary subject (usually the author) and
+    quoted in every query; the rest are discriminators so we don't drift to
+    unrelated namesakes.
+    """
     terms = [h.strip() for h in hints.split(",") if h.strip()]
-    queries = terms + [f"{terms[0]} publications" if terms else hints,
-                       f"{' '.join(terms)} related work"]
+    quoted = [_quote(t) for t in terms]
+    primary = quoted[0] if quoted else _quote(hints)
+    rest = " ".join(quoted[1:])
+
+    queries = [f"{primary} {rest}".strip(),
+               f"{primary} publications",
+               f"{primary} {quoted[-1]}" if len(quoted) > 1 else primary]
+    queries = list(dict.fromkeys(q for q in queries if q))  # dedupe, keep order
+
     seen, related, used = set(), [], []
-    with DDGS() as ddgs:
+    with _ddgs() as ddgs:
         for q in queries:
             used.append(q)
             for hit in ddgs.text(q, max_results=max_results):
-                url = hit.get("href")
+                url = hit.get("href") or hit.get("url")
                 if url and url not in seen:
                     seen.add(url)
                     related.append({"title": hit.get("title"), "url": url,
