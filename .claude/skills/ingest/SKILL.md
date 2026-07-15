@@ -42,10 +42,17 @@ scalar; ambiguous cases are flagged, not guessed.
 
 ## Learner-profile calibration (if profile/maths-background.md has `learning_mode: on`)
 Diff the extracted concept list against `profile/maths-background.md`. Ask the user **one
-batched multi-select** covering only concepts not already recorded ("which are you
-comfortable with?"). Write results back with status/confidence/provenance/date. Early
-materials ask a lot; it tapers as the ledger fills.
+batched multi-select** covering only concepts not already recorded. Grade each on the
+**mastery ladder** (`unseen → seen → followed → applied → intuitive`) — don't collapse to
+"comfortable or not": a concept can be `followed` (worked through the definition) without
+being `intuitive` (relatable to their own work). Capture a `target` where they're actively
+learning something. Write back level/target/confidence/provenance/date. Early materials
+ask a lot; it tapers as the ledger fills.
+
+## Verify + one-pager run by default
+After ingest, the pipeline continues into `contextualise`, `verify-maths`, and `one-pager`
+automatically (only `expand-derivation` waits to be asked).
 
 ## Outputs
 `material.md`, `notation.md`, `flags.md`, `context-hints.txt`, updated
-`profile/maths-background.md`. Hand off to `contextualise` and `verify-maths`.
+`profile/maths-background.md`.

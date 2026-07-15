@@ -9,9 +9,11 @@ Make a compressed step explicit. Stage 5 of Phase A — on demand, where most re
 goes.
 
 ## Set the granularity from the profile
-Read `profile/maths-background.md`. Expand at the level the profile implies: skip steps
-the user has marked `known`, spell out steps touching `learning`/`not-yet` concepts. If
-`learning_mode: off`, default to a medium level of detail.
+Read `profile/maths-background.md`. Expand at the level the ladder implies: skim steps
+that only touch `applied`/`intuitive` concepts; spell out steps touching
+`unseen`/`seen`/`followed` ones. For a `followed` concept the mechanics are already there
+— so expand toward *intuition and connection to the reader's work*, not just more algebra.
+If `learning_mode: off`, default to a medium level of detail.
 
 ## Expand
 Take the source step from `material.md` and reconstruct the intermediate algebra line by
@@ -21,7 +23,7 @@ line. For each line, mark it **routine** (mechanical, safe to skim) or **non-obv
 flagged as suspect.
 
 ## Prerequisite gaps
-If the expansion needs a concept the profile marks `not-yet`, say so explicitly and, when
+If the expansion needs a concept the profile marks `unseen`/`seen`, say so explicitly and, when
 useful, suggest which missing concept to shore up first (what it unlocks). Optionally
 record newly-understood concepts back into the profile.
 

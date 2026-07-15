@@ -8,8 +8,9 @@ description: Verify load-bearing equations symbolically and numerically with sym
 The trust layer. Stage 4 of Phase A. Runs whenever there's maths — not paper-specific.
 
 ## Pick the load-bearing equations
-With the user, identify which equations matter (main results, anything a later argument
-leans on). Don't try to verify everything — verify what carries weight.
+Runs by default after contextualise. **Propose** the load-bearing equations yourself (main
+results, anything a later argument leans on) and confirm the shortlist with the user before
+checking. Don't try to verify everything — verify what carries weight.
 
 ## Build the check spec
 Write `materials/<slug>/checks.json` as a list of steps, each:

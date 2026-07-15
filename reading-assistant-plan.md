@@ -98,7 +98,9 @@ Per profile, best fidelity first:
 
 ## Pipeline stages (Phase A)
 
-Stages marked *conditional* only run when the detected content warrants it.
+The pipeline runs stages 1–4 and 6–8 **by default** every time; only stage 5
+(expand-derivation) is **on-demand**, invoked per question rather than up front. Stages
+marked *conditional* additionally gate on detected content (e.g. maths present).
 
 **1. Ingest** *(scripts + LLM review).* Detect type → run the profile's ingestion path →
 produce `material.md`. LLM does the flag-and-confirm pass into `flags.md`.
@@ -120,8 +122,9 @@ records in `flags.md` when context couldn't be established.
 
 **4. Verify the maths** *(LLM + sympy scripts, conditional on maths present).* The trust
 layer. Re-derive selected steps symbolically, check dimensional consistency, confirm
-indices balance, test limiting/edge cases numerically. Results go to `verify.md`. Runs on
-the equations you flag as load-bearing.
+indices balance, test limiting/edge cases numerically. Results go to `verify.md`. Runs by
+default: the LLM proposes the load-bearing equations (main results, anything later steps
+lean on) and confirms the shortlist with you before checking.
 
 **5. Expand derivations** *(LLM, on demand, conditional).* Take a compressed step
 ("substituting and rearranging yields…") and fill the omitted algebra explicitly, marking
@@ -192,10 +195,14 @@ reading/
 
 ## Learner profile (adaptive, toggleable)
 
-A repo-level `profile/maths-background.md` records concepts and notation with a status
-(`known` / `learning` / `not-yet`), a confidence, provenance (self-reported vs
-demonstrated), and a last-updated date. Its header carries `learning_mode: on|off` —
-turning it off disables all probing and adaptation and restores plain processing.
+A repo-level `profile/maths-background.md` records concepts on a **mastery ladder** that
+separates mechanics from intuition — `unseen → seen → followed → applied → intuitive` —
+with an optional per-concept `target`, a confidence, provenance (self-reported vs
+demonstrated), and a last-updated date. The key distinction is `followed` (worked through
+the definition, can reproduce it) vs `intuitive` (can relate it to your own work): a
+concept can be mechanically understood yet not yet transferable. Its header carries
+`learning_mode: on|off` — turning it off disables all probing and adaptation and restores
+plain processing.
 
 Populated two ways, both writing to the same ledger:
 
@@ -203,8 +210,8 @@ Populated two ways, both writing to the same ledger:
   the profile and you get **one batched multi-select** covering only concepts not already
   recorded. Early on this asks a lot; as the ledger fills it shrinks toward nothing.
 - **Conversational.** During Phase B the session infers your level from how you ask, and
-  moves items along (`not-yet → learning → known`, dated) when you signal understanding
-  — no explicit quiz.
+  moves items up the ladder (dated) when you signal understanding — e.g. `followed →
+  intuitive` once you can relate a concept to your own work — no explicit quiz.
 
 What the profile drives (all on):
 
