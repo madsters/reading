@@ -1,0 +1,23 @@
+# Raw drops are transient working input, not tracked
+inbox/*
+!inbox/.gitkeep
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+
+# macOS
+.DS_Store
+
+# Processed corpora are kept (commit on your private branch); nothing to ignore
+# under materials/ by default.

@@ -1,0 +1,50 @@
+% One-pager template — TUTORIAL / DOCUMENT digest layout.
+% For teaching decks and reports: the goal is a map of the ideas, not a paper abstract.
+% Keep to ONE page: build_onepager.py enforces it.
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=1.4cm]{geometry}
+\usepackage{amsmath,amssymb,bm}
+\usepackage{multicol}
+\usepackage{enumitem}
+\setlist{nosep,leftmargin=1.2em}
+\usepackage{titlesec}
+\titleformat{\section}{\bfseries\small}{}{0pt}{}
+\titlespacing{\section}{0pt}{4pt}{2pt}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+{\large\bfseries {{TITLE}}}\\[-2pt]
+{\footnotesize {{SOURCE}} \hfill {{AUTHOR_OR_GROUP}} \hfill {{DATE}}}
+\hrule\vspace{4pt}
+
+\section*{In one line}
+% The single takeaway. ~25 words.
+{{ONE_LINE}}
+
+\begin{multicols}{2}
+\section*{Key ideas}
+% The 3–6 concepts the material teaches, each in a clause.
+{{KEY_IDEAS}}
+
+\section*{Concept map}
+% How the ideas depend on each other — prerequisites -> results.
+{{CONCEPT_MAP}}
+
+\section*{Worked takeaways}
+% The equations/methods worth keeping, verbatim. Keep 2–4.
+{{WORKED_TAKEAWAYS}}
+
+\section*{Prerequisites}
+% What you need to already know (from the learner profile: flag any not-yet).
+{{PREREQUISITES}}
+
+\section*{Where it fits}
+% From context.md: the source's body of work / the field.
+{{WHERE_IT_FITS}}
+
+\section*{Relevance to my work}
+% ~40 words: what to apply, linked notes.
+{{RELEVANCE}}
+\end{multicols}
+\end{document}

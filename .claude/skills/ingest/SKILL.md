@@ -1,0 +1,45 @@
+---
+name: ingest
+description: Ingest a dropped file (paper, slide deck, or document) into a materials/<slug>/ corpus at highest fidelity. Detects type, confirms with the user, runs the right extraction path, builds notation and flags, and calibrates the learner profile. Use when a new file appears in inbox/ or the user asks to process/read a document.
+---
+
+# Ingest
+
+Turn a file in `inbox/` into a clean `materials/<slug>/` corpus. This is stage 1–3 of
+Phase A. Do the mechanical work with the scripts; do judgement work (flags, notation,
+calibration) yourself.
+
+## Run-start prompt (always)
+1. Run `scripts/detect_type.py <file>` to get the profile guess + signals.
+2. **Ask the user** to confirm or override the detected profile, and optionally supply
+   hints — **author, research group, or source** — used later by `contextualise` when
+   there's no citation graph. Record hints in `materials/<slug>/context-hints.txt`.
+
+## Ingestion (pick by confirmed profile — best fidelity first)
+- `arxiv-paper` → `scripts/fetch_arxiv_source.py <id> --out materials/<slug>/source`
+  then read the flattened `.tex` into `material.md`. **Near-lossless — do not quiz
+  notation on this path.**
+- `slides` → `scripts/extract_slides.py <file> --out materials/<slug>` (text + speaker
+  notes + slide images). Speaker notes are the richest comprehension signal — keep them.
+- `journal-paper` / PDF → `scripts/convert_pdf.py <file> --out materials/<slug>`.
+- `document` → `scripts/convert_doc.py <file> --out materials/<slug>`.
+
+## Flag-and-confirm (flag-driven)
+Read the converter's `flags.json`. Write `flags.md` listing unreadable / low-confidence /
+possibly-misread regions. **Only** put regions in front of the user where confidence is
+low — don't quiz the near-lossless source path.
+
+## Notation
+Extract every symbol/operator into `notation.md` (meaning + scalar/vector/matrix role).
+Enforce the bold convention: single letters in vector/matrix roles are bold unless proven
+scalar; ambiguous cases are flagged, not guessed.
+
+## Learner-profile calibration (if profile/maths-background.md has `learning_mode: on`)
+Diff the extracted concept list against `profile/maths-background.md`. Ask the user **one
+batched multi-select** covering only concepts not already recorded ("which are you
+comfortable with?"). Write results back with status/confidence/provenance/date. Early
+materials ask a lot; it tapers as the ledger fills.
+
+## Outputs
+`material.md`, `notation.md`, `flags.md`, `context-hints.txt`, updated
+`profile/maths-background.md`. Hand off to `contextualise` and `verify-maths`.

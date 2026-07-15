@@ -1,0 +1,50 @@
+% One-pager template — PAPER layout.
+% Fill the {{PLACEHOLDERS}}. Keep to ONE page: build_onepager.py enforces it.
+% Rough budget per box is noted in comments; trim ruthlessly.
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=1.4cm]{geometry}
+\usepackage{amsmath,amssymb,bm}
+\usepackage{multicol}
+\usepackage{enumitem}
+\setlist{nosep,leftmargin=1.2em}
+\usepackage{titlesec}
+\titleformat{\section}{\bfseries\small}{}{0pt}{}
+\titlespacing{\section}{0pt}{4pt}{2pt}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+{\large\bfseries {{TITLE}}}\\[-2pt]
+{\footnotesize {{AUTHORS}} \hfill {{VENUE_YEAR}} \hfill {{ARXIV_OR_DOI}}}
+\hrule\vspace{4pt}
+
+\begin{multicols}{2}
+\section*{Problem}
+% ~50 words: what question, why it matters.
+{{PROBLEM}}
+
+\section*{Method}
+% ~70 words: the approach in one breath.
+{{METHOD}}
+
+\section*{Key equations}
+% The load-bearing results, verbatim from source. Keep 2–4.
+{{KEY_EQUATIONS}}
+
+\section*{Results}
+% ~50 words: what was shown, with the number that matters.
+{{RESULTS}}
+
+\section*{Assumptions \& limitations}
+% Bullet the preconditions from assumptions.md; note where it won't transfer.
+{{ASSUMPTIONS_LIMITATIONS}}
+
+\section*{Verification notes}
+% Anything verify.md found — discrepancies stated plainly, or "checks passed".
+{{VERIFICATION}}
+
+\section*{Relevance to my work}
+% ~40 words: methods to borrow, clashes with my assumptions, linked notes.
+{{RELEVANCE}}
+\end{multicols}
+\end{document}
