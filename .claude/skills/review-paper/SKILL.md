@@ -6,15 +6,20 @@ description: Run the peer-review pipeline on a paper — assess correctness, nov
 # Review a paper
 
 The second pipeline. Where the comprehend pipeline helps the reader *understand* a paper,
-this one helps them *judge* it and draft a referee report. It shares the front end
-(comprehension is a prerequisite for review) and diverges into critical assessment.
+this one helps them *judge* it and draft a referee report. **Review always runs the full
+comprehend pipeline first** — you cannot fairly referee what you haven't understood,
+verified, and pinned the assumptions of — then adds the critical-assessment stages on top.
 
 **Stance:** balanced peer review for a venue — fair, evidence-based, strengths *and*
 weaknesses, ending in a recommendation + reviewer confidence. **Deliverable:**
 `materials/<slug>/review.md` (fill `templates/review.md`).
 
 ## Pipeline
-1. **Ingest + notation** — reuse the `ingest` skill for the high-fidelity corpus. You can't
+0. **Run the full comprehend pipeline first** — `ingest` → `contextualise` →
+   `resolve-sources` → `verify-maths` → `assumptions` → `one-pager`. The review stages below
+   build directly on those artifacts (`verify.md`, `assumptions.md`, `context.md`). Do not
+   start the review until comprehend is complete.
+1. **Ingest + notation** — from the comprehend run: the high-fidelity corpus. You can't
    fairly review what you can't read cleanly.
 2. **Claims & contributions ledger** — extract what the paper *explicitly claims* to
    contribute (theoretical and empirical) and its central claims; locate each. This is the
@@ -48,6 +53,7 @@ weaknesses, ending in a recommendation + reviewer confidence. **Deliverable:**
   group the reader collaborates with or competes with directly).
 
 ## Relationship to the comprehend pipeline
-Shares `ingest` (and reuses `contextualise`/`verify-maths`/`assumptions`). It does **not**
-need the learner-facing outputs (one-pager, learner-profile calibration). Both pipelines can
-run on the same drop — comprehend to understand, review to judge.
+Review is a **superset**: it always runs the entire comprehend pipeline first, then adds the
+review-only stages (claims ledger, evidence/methodology, claims↔evidence, clarity) and the
+`review.md` deliverable. So selecting "review" at drop time yields both the comprehend corpus
+*and* the referee report — there is no separate "both" option.

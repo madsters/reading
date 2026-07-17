@@ -153,16 +153,18 @@ section / equation numbers from `material.md`.
 
 ## Two pipelines: comprehend & review
 
-A dropped document can be run through either or both pipelines; the run-start prompt asks
-which. They share the front end because you can't review what you haven't understood.
+The run-start prompt asks which pipeline. **Review is a superset of comprehend** — you can't
+review what you haven't understood, verified, and pinned the assumptions of — so there is no
+separate "both".
 
 - **Comprehend** (stages above) — understand the material for the reader's own use.
   Deliverable: the markdown corpus + `onepager.pdf`.
 - **Review** (`review-paper` skill) — referee a paper. Balanced venue peer-review stance.
-  Shares `ingest`; reuses `contextualise` / `verify-maths` / `assumptions` with a critical
-  lens; adds review-only stages: a **claims & contributions ledger**, **evidence &
-  methodology / reproducibility** assessment, a **claims↔evidence map** (supported / partial
-  / unsupported), and **clarity**. Deliverable: `review.md` (from `templates/review.md`) —
+  **Runs the entire comprehend pipeline first**, reusing its `contextualise` /
+  `verify-maths` / `assumptions` outputs with a critical lens; then adds review-only stages:
+  a **claims & contributions ledger**, **evidence & methodology / reproducibility**
+  assessment, a **claims↔evidence map** (supported / partial / unsupported), and
+  **clarity**. Deliverable: `review.md` (from `templates/review.md`) —
   summary, strengths, weaknesses (major/minor), line-referenced comments, questions to
   authors, and a **recommendation + reviewer confidence**.
 
