@@ -14,6 +14,9 @@ calibration) yourself.
 2. **Ask the user** to confirm or override the detected profile, and optionally supply
    hints — **author, research group, or source** — used later by `contextualise` when
    there's no citation graph. Record hints in `materials/<slug>/context-hints.txt`.
+3. **Ask which pipeline(s)** to run: **comprehend** (understand — the default chain ending
+   in the one-pager), **review** (referee a paper — hand off to the `review-paper` skill),
+   or **both**. `ingest` is shared by both, so it always runs first.
 
 ## Ingestion (pick by confirmed profile — best fidelity first)
 - `arxiv-paper` → `scripts/fetch_arxiv_source.py <id> --out materials/<slug>/source`

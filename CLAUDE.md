@@ -4,13 +4,21 @@ This repo processes dense material (papers, tutorial slide decks, technical docu
 into a high-fidelity corpus, then helps you comprehend it. There are two phases.
 
 ## Phase A — Build (in Claude Code)
-When a file lands in `inbox/`, run the pipeline via the skills in `.claude/skills/`. By
-default every material runs `ingest` → `contextualise` → `resolve-sources` →
-`verify-maths` → `assumptions` → `one-pager`; `expand-derivation` is on-demand (invoked per
-question, not up front). `resolve-sources` acts only when there are flagged equations *and*
-a cited arXiv source to reconcile against. Each material becomes a folder under
-`materials/<slug>/`. See `reading-assistant-plan.md` for the full
+When a file lands in `inbox/`, the run-start prompt asks which **pipeline(s)** to run —
+**comprehend**, **review**, or both — alongside confirming type and hints. Each material
+becomes a folder under `materials/<slug>/`. See `reading-assistant-plan.md` for the full
 design.
+
+- **Comprehend pipeline** (understand the material): `ingest` → `contextualise` →
+  `resolve-sources` → `verify-maths` → `assumptions` → `one-pager`. `expand-derivation` is
+  on-demand (per question). `resolve-sources` acts only when there are flagged equations
+  *and* a cited arXiv source to reconcile against.
+- **Review pipeline** (referee a paper — via the `review-paper` skill): shares `ingest`,
+  then claims ledger → novelty (`contextualise`) → soundness (`verify-maths`) → assumptions
+  scrutiny (`assumptions`) → evidence/methodology → claims↔evidence → clarity → a structured
+  `review.md` with a recommendation + reviewer confidence. Balanced venue peer-review stance;
+  criticisms are grounded and cited, verified issues kept separate from concerns, and the
+  recommendation is advisory.
 
 ## Phase B — Comprehend (this Claude Project / cowork)
 When answering questions about a material, you MUST:

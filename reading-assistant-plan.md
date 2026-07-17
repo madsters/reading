@@ -151,6 +151,28 @@ section / equation numbers from `material.md`.
 
 ---
 
+## Two pipelines: comprehend & review
+
+A dropped document can be run through either or both pipelines; the run-start prompt asks
+which. They share the front end because you can't review what you haven't understood.
+
+- **Comprehend** (stages above) — understand the material for the reader's own use.
+  Deliverable: the markdown corpus + `onepager.pdf`.
+- **Review** (`review-paper` skill) — referee a paper. Balanced venue peer-review stance.
+  Shares `ingest`; reuses `contextualise` / `verify-maths` / `assumptions` with a critical
+  lens; adds review-only stages: a **claims & contributions ledger**, **evidence &
+  methodology / reproducibility** assessment, a **claims↔evidence map** (supported / partial
+  / unsupported), and **clarity**. Deliverable: `review.md` (from `templates/review.md`) —
+  summary, strengths, weaknesses (major/minor), line-referenced comments, questions to
+  authors, and a **recommendation + reviewer confidence**.
+
+  Review honesty: every criticism is grounded and cited; **verified** issues (e.g. a maths
+  discrepancy from `verify.md`) are kept separate from **concerns to check**; the tool never
+  invents flaws; the recommendation is **advisory** (the reviewer decides); `current-work.md`
+  sets reviewer confidence/expertise and flags any conflict of interest.
+
+---
+
 ## Repository layout
 
 ```
@@ -159,11 +181,14 @@ reading/
 ├── inbox/                        # drop files here to be processed
 ├── .claude/
 │   └── skills/
-│       ├── ingest/               # detect type → profile ingestion → material.md + flags
-│       ├── contextualise/        # Semantic Scholar OR web-search fallback
+│       ├── ingest/               # detect type + pipeline selector → ingestion → material.md + flags
+│       ├── contextualise/        # Semantic Scholar OR web-search fallback; grounded relevance
+│       ├── resolve-sources/      # fetch cited arXiv source, reconcile flagged equations
 │       ├── verify-maths/         # sympy: re-derive, dim-check, index balance, limits
+│       ├── assumptions/          # preconditions per result + transferability flags
 │       ├── expand-derivation/    # fill omitted algebra; flag non-obvious leaps
-│       └── one-pager/            # fill profile-aware template, compile, verify 1 page
+│       ├── one-pager/            # fill profile-aware template, compile, verify 1 page
+│       └── review-paper/         # REVIEW pipeline: claims→evidence, soundness, → review.md
 ├── scripts/                      # deterministic muscle (no token cost)
 │   ├── detect_type.py            # route a dropped file to a profile
 │   ├── fetch_arxiv_source.py     # e-print tarball + flatten
@@ -176,7 +201,8 @@ reading/
 │   └── make_qa_html.py           # qa/*.md → qa/*.html with MathJax (terminal-phase render)
 ├── templates/
 │   ├── onepager_paper.tex        # paper layout
-│   └── onepager_digest.tex       # tutorial / document layout
+│   ├── onepager_digest.tex       # tutorial / document layout
+│   └── review.md                 # structured peer-review skeleton (review pipeline)
 ├── profile/
 │   ├── maths-background.md        # learner profile (blank on main; real data on maddy-learning)
 │   └── current-work.md           # standing description of active research (grounds "relevance")
@@ -189,7 +215,8 @@ reading/
 │       ├── assumptions.md        # preconditions each key result relies on
 │       ├── context.md            # lineage, positioning, related work
 │       ├── verify.md             # what the maths checks found
-│       ├── onepager.pdf          # the deliverable
+│       ├── onepager.pdf          # comprehend deliverable
+│       ├── review.md             # review deliverable (when the review pipeline is run)
 │       └── qa/                   # Q&A logs (.md + rendered .html)
 └── README.md
 ```
